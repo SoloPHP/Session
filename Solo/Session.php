@@ -14,7 +14,10 @@ class Session
         $this->session = &$_SESSION;
     }
 
-    public function get(string $key, $default = null): ?string
+    /**
+     * @return mixed
+     */
+    public function get(string $key, $default = null)
     {
         return $this->session[$key] ?? $default;
     }
@@ -43,13 +46,7 @@ class Session
     {
         $this->session = [];
     }
-
-    /** Regenerate current session id
-     * Useful to protect against session spoofing
-     * It is necessary to regenerate the identifier in the following cases:
-     * - at the time of creating a new session
-     * - at the time of change, user authorization
-     */
+    
     public function regenerateId(): void
     {
         session_regenerate_id(true);

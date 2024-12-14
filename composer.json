@@ -1,13 +1,20 @@
 {
   "name": "solophp/session",
   "type": "library",
-  "description": "PHP Session Management",
-  "keywords": ["php","session"],
+  "description": "Secure PHP Session Handler with advanced security features",
+    "keywords": [
+        "php",
+        "session",
+        "security",
+        "session-handler",
+        "php-session"
+    ],
   "license": "MIT",
   "authors": [
     {
       "name": "Vitaliy Olos",
-      "email": "vedastudio@gmail.com"
+            "email": "vedastudio@gmail.com",
+            "role": "Developer"
     }
   ],
   "autoload": {
@@ -16,7 +23,7 @@
     }
   },
   "require": {
-    "php": ">=7.4"
+        "php": ">=8.1"
   },
   "minimum-stability": "dev",
   "prefer-stable": true

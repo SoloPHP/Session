@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Solo;
+declare(strict_types=1);
+
+namespace Solo\Session;
 
 class Session
 {
@@ -75,7 +77,7 @@ class Session
     {
         $this->session = [];
     }
-    
+
     public function regenerateId(): void
     {
         session_regenerate_id(true);
@@ -84,28 +86,32 @@ class Session
     private function checkSessionTimeout(): void
     {
         if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $this->timeout)) {
-            session_unset();
-            session_destroy();
-            session_start();
-    }
+            $this->resetSession();
+        }
         $_SESSION['last_activity'] = time();
     }
 
     private function checkSessionIntegrity(): void
     {
-        if (isset($_SESSION['user_agent']) && $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT']) {
-            session_unset();
-            session_destroy();
-            session_start();
-    }
-        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+        $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        $remoteAddr = $_SERVER['REMOTE_ADDR'] ?? '';
 
-        if (isset($_SESSION['ip']) && $_SESSION['ip'] !== $_SERVER['REMOTE_ADDR']) {
-            session_unset();
-            session_destroy();
-            session_start();
+        if (isset($_SESSION['user_agent']) && $_SESSION['user_agent'] !== $userAgent) {
+            $this->resetSession();
+        }
+        $_SESSION['user_agent'] = $userAgent;
+
+        if (isset($_SESSION['ip']) && $_SESSION['ip'] !== $remoteAddr) {
+            $this->resetSession();
+        }
+        $_SESSION['ip'] = $remoteAddr;
     }
-        $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+
+    private function resetSession(): void
+    {
+        session_unset();
+        session_destroy();
+        session_start();
     }
 
     public function destroy(): void

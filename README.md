@@ -1,5 +1,9 @@
 # PHP Session Handler
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/solophp/session.svg?style=flat-square)](https://packagist.org/packages/solophp/session)
+[![License](https://img.shields.io/packagist/l/solophp/session.svg?style=flat-square)](https://packagist.org/packages/solophp/session)
+[![PHP Version](https://img.shields.io/packagist/php-v/solophp/session.svg?style=flat-square)](https://packagist.org/packages/solophp/session)
+
 Secure PHP session handler with advanced security features and session management.
 
 ## Features
@@ -25,7 +29,7 @@ composer require solophp/session
 ## Basic Usage
 
 ```php
-use Solo\Session;
+use Solo\Session\Session;
 
 // Create session with default secure settings
 $session = new Session();
@@ -149,6 +153,26 @@ $timeout = $session->getTimeout();
 - `PHP_SESSION_DISABLED` = 0
 - `PHP_SESSION_NONE` = 1
 - `PHP_SESSION_ACTIVE` = 2
+
+## Development
+
+### Running Tests
+
+```bash
+composer test
+```
+
+### Code Style
+
+Check code style:
+```bash
+composer cs
+```
+
+Fix code style:
+```bash
+composer cs-fix
+```
 
 ## Best Practices
 

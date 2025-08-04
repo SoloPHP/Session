@@ -1,7 +1,18 @@
-!.gitignore
-vendor
+# Dependencies
+vendor/
 composer.lock
-example
-.idea
+
+# IDE
+.idea/
+.vscode/
+
+# OS
 .DS_Store
 Thumbs.db
+
+# Testing
+.phpunit.cache/
+coverage-html/
+
+# Examples/Development
+example/
